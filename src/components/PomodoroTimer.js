@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { TextInput } from "react-native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import TimerDisplay from "./TimerDisplay";
+import TimerSetup from "./TimerSetup";
 
 function PomodoroTimer() {
   const [workTime, setWorkTime] = useState(0.1);
@@ -97,6 +98,7 @@ function PomodoroTimer() {
 
   return (
     <View style={styles.container}>
+      {/*
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Work Time:</Text>
         <TextInput
@@ -115,6 +117,11 @@ function PomodoroTimer() {
           returnKeyType={"done"}
         />
       </View>
+  */}
+      <TimerSetup
+        setWorkTime={handleWorkTimeChange}
+        setBreakTime={handleRestTimeChange}
+      />
 
       <Text>
         {isNaN(workTime)
@@ -129,8 +136,11 @@ function PomodoroTimer() {
       </Text>
 
       <TimerDisplay timer={timer} working={isActive} onBreak={isResting} />
+
+      {/*
       <Text style={styles.timer}>{formatTime(timer)}</Text>
       <Text>{isActive ? "Working" : "Not Working"}</Text>
+        */}
 
       <TouchableOpacity
         style={styles.button}
