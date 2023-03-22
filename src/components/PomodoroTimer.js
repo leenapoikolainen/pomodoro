@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { TextInput } from "react-native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Header from "../Header";
 import TimerDisplay from "./TimerDisplay";
 import TimerSetup from "./TimerSetup";
 
@@ -97,8 +98,10 @@ function PomodoroTimer() {
   };
 
   return (
-    <View style={styles.container}>
-      {/*
+    <View>
+      <Header />
+      <View style={styles.container}>
+        {/*
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Work Time:</Text>
         <TextInput
@@ -118,40 +121,41 @@ function PomodoroTimer() {
         />
       </View>
   */}
-      <TimerSetup
-        setWorkTime={handleWorkTimeChange}
-        setBreakTime={handleRestTimeChange}
-      />
+        <TimerSetup
+          setWorkTime={handleWorkTimeChange}
+          setBreakTime={handleRestTimeChange}
+        />
 
-      <Text>
-        {isNaN(workTime)
-          ? "Please set your work time"
-          : "" + "Your work time is set to " + workTime}
-      </Text>
+        <Text>
+          {isNaN(workTime)
+            ? "Please set your work time"
+            : "" + "Your work time is set to " + workTime}
+        </Text>
 
-      <Text>
-        {isNaN(restTime)
-          ? "Please set your break time"
-          : "" + "Your work time is set to " + restTime}
-      </Text>
+        <Text>
+          {isNaN(restTime)
+            ? "Please set your break time"
+            : "" + "Your work time is set to " + restTime}
+        </Text>
 
-      <TimerDisplay timer={timer} working={isActive} onBreak={isResting} />
+        <TimerDisplay timer={timer} working={isActive} onBreak={isResting} />
 
-      {/*
+        {/*
       <Text style={styles.timer}>{formatTime(timer)}</Text>
       <Text>{isActive ? "Working" : "Not Working"}</Text>
         */}
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={isActive ? stopTimer : startTimer}
-      >
-        <Text style={styles.buttonText}>{isActive ? "Stop" : "Start"}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={isActive ? stopTimer : startTimer}
+        >
+          <Text style={styles.buttonText}>{isActive ? "Stop" : "Start"}</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={resetTimer}>
-        <Text style={styles.buttonText}>{"Reset"}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={resetTimer}>
+          <Text style={styles.buttonText}>{"Reset"}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
