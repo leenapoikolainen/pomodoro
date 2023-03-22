@@ -19,11 +19,15 @@ function TimerDisplay({ timer, working, onBreak }) {
 
   return (
     <View>
-      <Text>{working ? "Working" : ""}</Text>
-      <Text>{onBreak ? "On a break" : ""}</Text>
-
       <View style={styles.container}>
-        <Text style={styles.textStyle}>{formatTime(timer)}</Text>
+        {!working && !onBreak && (
+          <Text style={styles.textStyle}>Set up your timer</Text>
+        )}
+        {working && <Text style={styles.textStyle}>Keep in working!</Text>}
+        {onBreak && <Text style={styles.textStyle}>Enjoy your break!</Text>}
+      </View>
+      <View style={styles.timerContainer}>
+        <Text style={styles.timerTextStyle}>{formatTime(timer)}</Text>
       </View>
     </View>
   );
@@ -35,14 +39,24 @@ const styles = StyleSheet.create({
   container: {
     borderColor: "black",
     alignItems: "center",
+    padding: "5%",
+  },
+  timerContainer: {
+    borderColor: "black",
+    alignItems: "center",
     backgroundColor: "#C2362B",
     padding: "10%",
     marginBottom: 20,
     borderRadius: 80,
   },
-  textStyle: {
+  timerTextStyle: {
     fontSize: 50,
     fontWeight: "400",
     color: "white",
+  },
+  textStyle: {
+    fontSize: 20,
+    fontWeight: "400",
+    color: "black",
   },
 });
