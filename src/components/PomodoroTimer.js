@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { TextInput } from "react-native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Header from "../Header";
+import Header from "./Header";
 import TimerDisplay from "./TimerDisplay";
 import TimerSetup from "./TimerSetup";
 
@@ -11,11 +11,12 @@ function PomodoroTimer() {
   const [timer, setTimer] = useState(workTime * 60);
   const [isActive, setIsActive] = useState(false);
   const [isResting, setIsResting] = useState(false);
+  const [timerRunning, setTimerRunning] = useState(false);
 
   useEffect(() => {
     let interval = null;
     // Timer starts when either work time or rest time starts
-    if (isActive || isResting) {
+    if (timerRunning) {
       interval = setInterval(() => {
         setTimer((timer) => timer - 1);
       }, 1000);
@@ -23,10 +24,10 @@ function PomodoroTimer() {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, timer]);
+  }, [timerRunning, timer]);
 
   useEffect(() => {
-    if ((timer === 0 && isActive) || (timer === 0 && isResting)) {
+    if (timer === 0 && timerRunning) {
       // Timer is 0, status active --> change to rest time
       if (!isResting) {
         setIsActive(false);
@@ -44,7 +45,7 @@ function PomodoroTimer() {
 
       return () => {};
     }
-  }, [timer]);
+  }, [timer, timerRunning]);
 
   // Updates only after the effect function has been executed
   //console.log("is active is " + isActive);
@@ -63,13 +64,19 @@ function PomodoroTimer() {
   };
 
   const startTimer = () => {
-    setIsActive(true);
+    // Need to add logic to set active or resting
+
+    // Initial state
+    if (!isActive && !isResting) {
+      setIsActive(true);
+    }
+
+    setTimerRunning(true);
   };
 
   const stopTimer = () => {
-    setIsActive(false);
-    setIsResting(false);
-    //setTimer(workTime * 60);
+    setTimerRunning(false);
+    console.log(isActive);
   };
 
   const resetTimer = () => {
@@ -78,6 +85,7 @@ function PomodoroTimer() {
     setWorkTime(0.1);
     setRestTime(0.2);
     setTimer(workTime * 60);
+    setTimerRunning(false);
   };
 
   const handleWorkTimeChange = (text) => {
@@ -143,13 +151,22 @@ function PomodoroTimer() {
         {/*
       <Text style={styles.timer}>{formatTime(timer)}</Text>
       <Text>{isActive ? "Working" : "Not Working"}</Text>
-        */}
+        
 
         <TouchableOpacity
           style={styles.button}
           onPress={isActive ? stopTimer : startTimer}
         >
           <Text style={styles.buttonText}>{isActive ? "Stop" : "Start"}</Text>
+        </TouchableOpacity>
+*/}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={timerRunning ? stopTimer : startTimer}
+        >
+          <Text style={styles.buttonText}>
+            {timerRunning ? "Stop" : "Start"}
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={resetTimer}>
