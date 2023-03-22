@@ -13,7 +13,7 @@ class Header extends React.Component {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: "pink",
+    backgroundColor: "#C2362B",
     height: 100,
     justifyContent: "center",
     alignItems: "center",

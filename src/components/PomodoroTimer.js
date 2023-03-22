@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { TextInput } from "react-native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Header from "./Header";
+import TimerButtons from "./TimerButtons";
 import TimerDisplay from "./TimerDisplay";
 import TimerSetup from "./TimerSetup";
 
@@ -76,7 +77,6 @@ function PomodoroTimer() {
 
   const stopTimer = () => {
     setTimerRunning(false);
-    console.log(isActive);
   };
 
   const resetTimer = () => {
@@ -159,7 +159,7 @@ function PomodoroTimer() {
         >
           <Text style={styles.buttonText}>{isActive ? "Stop" : "Start"}</Text>
         </TouchableOpacity>
-*/}
+
         <TouchableOpacity
           style={styles.button}
           onPress={timerRunning ? stopTimer : startTimer}
@@ -172,6 +172,13 @@ function PomodoroTimer() {
         <TouchableOpacity style={styles.button} onPress={resetTimer}>
           <Text style={styles.buttonText}>{"Reset"}</Text>
         </TouchableOpacity>
+*/}
+        <TimerButtons
+          timerOn={timerRunning}
+          stopTimer={stopTimer}
+          startTimer={startTimer}
+          resetTimer={resetTimer}
+        />
       </View>
     </View>
   );
