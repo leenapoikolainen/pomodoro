@@ -26,6 +26,11 @@ function TimerDisplay({ timer, working, onBreak }) {
         {working && <Text style={styles.textStyle}>Keep on working!</Text>}
         {onBreak && <Text style={styles.textStyle}>Enjoy your break!</Text>}
       </View>
+      {!working && !onBreak && (
+        <View style={styles.timerContainer}>
+          <Text style={styles.timerTextStyle}>{formatTime(timer)}</Text>
+        </View>
+      )}
       {working && (
         <View style={styles.timerContainer}>
           <Text style={styles.timerTextStyle}>{formatTime(timer)}</Text>
