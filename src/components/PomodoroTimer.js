@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { TextInput } from "react-native";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Alert, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Header from "./Header";
 import TimerButtons from "./TimerButtons";
 import TimerDisplay from "./TimerDisplay";
@@ -65,8 +65,12 @@ function PomodoroTimer() {
   };
 
   const startTimer = () => {
-    // Need to add logic to set active or resting
-
+    if (workTime === 0 || isNaN(workTime)) {
+      Alert.alert("Time not set", "You need to set up your timer", [
+        { text: "OK" },
+      ]);
+      return;
+    }
     // Initial state
     if (!isActive && !isResting) {
       setIsActive(true);

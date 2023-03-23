@@ -10,7 +10,7 @@ import {
 
 function TimerSetup(props) {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Work Time:</Text>
         <TextInput
@@ -18,6 +18,8 @@ function TimerSetup(props) {
           keyboardType="number-pad"
           onChangeText={props.setWorkTime}
           returnKeyType={"done"}
+          placeholder="min"
+          defaultValue="25"
         />
       </View>
       <View style={styles.inputContainer}>
@@ -27,6 +29,8 @@ function TimerSetup(props) {
           keyboardType="number-pad"
           onChangeText={props.setBreakTime}
           returnKeyType={"done"}
+          placeholder="min"
+          defaultValue="5"
         />
       </View>
     </View>
@@ -39,6 +43,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
   },
   timer: {
     fontSize: 80,
@@ -57,6 +63,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 10,
   },
   inputLabel: {
     fontSize: 20,
@@ -67,5 +74,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     padding: 10,
     borderRadius: 5,
+    height: 40,
+    width: 70,
   },
 });
