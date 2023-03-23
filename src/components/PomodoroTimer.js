@@ -66,9 +66,19 @@ function PomodoroTimer() {
 
   const startTimer = () => {
     if (workTime === 0 || isNaN(workTime)) {
-      Alert.alert("Time not set", "You need to set up your timer", [
-        { text: "OK" },
-      ]);
+      Alert.alert(
+        "Work time not set",
+        "You need to set up your work time (>0 min)",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+    if (restTime === 0 || isNaN(restTime)) {
+      Alert.alert(
+        "Break time not set",
+        "You need to set up your rest time (>0 min)",
+        [{ text: "OK" }]
+      );
       return;
     }
     // Initial state
