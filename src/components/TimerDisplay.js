@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 function TimerDisplay({ timer, working, onBreak }) {
+
   const formatTime = (time) => {
     if (isNaN(time)) {
       return "timer";
@@ -19,16 +20,6 @@ function TimerDisplay({ timer, working, onBreak }) {
 
   return (
     <View>
-      {/* Status text */}
-      <View style={styles.container}>
-        
-        {!working && !onBreak && (
-          <Text style={styles.textStyle}>Set up your timer</Text>
-        )}
-        {working && <Text style={styles.textStyle}>Keep on working!</Text>}
-        {onBreak && <Text style={styles.textStyle}>Enjoy your break!</Text>}
-      </View>
-
        {/* Timer box */}
       {!working && !onBreak && (
         <View style={styles.setTimerContainer}>

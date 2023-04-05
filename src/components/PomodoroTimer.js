@@ -10,14 +10,13 @@ function PomodoroTimer() {
   const [workTime, setWorkTime] = useState(0.1); // For testing purposes, set the work time to few seconds
   const [restTime, setRestTime] = useState(0.2); // For testing purposes, set the break time to few seconds
   const [timer, setTimer] = useState(workTime * 60); // Timer initialised with work time
-  const [isActive, setIsActive] = useState(false);  // Timer not active when starting
+  const [isActive, setIsActive] = useState(false); // Timer not active when starting
   const [isResting, setIsResting] = useState(false); // Timer not resting when starting
   const [timerRunning, setTimerRunning] = useState(false); // Timer not running when starting
   const [worSetsCompleted, setWorkSetsCompleted] = useState(0); // No work sets completed
 
   useEffect(() => {
     let interval = null;
-
     // Timer starts when either work time or rest time starts
     if (timerRunning) {
       interval = setInterval(() => {
@@ -36,7 +35,6 @@ function PomodoroTimer() {
         setIsActive(false);
         setIsResting(true);
         setTimer(restTime * 60);
-        console.log("Option 1");
         setWorkSetsCompleted(worSetsCompleted + 1);
       }
       // Timer is 0, status resting --> change to work time
@@ -44,28 +42,11 @@ function PomodoroTimer() {
         setIsResting(false);
         setTimer(workTime * 60);
         setIsActive(true);
-        console.log("Option 2");
       }
 
       return () => {};
     }
   }, [timer, timerRunning]);
-
-  // Updates only after the effect function has been executed
-  //console.log("is active is " + isActive);
-  //console.log("is resting is " + isResting);
-
-  const formatTime = (time) => {
-    if (isNaN(time)) {
-      return "timer";
-    } else {
-      let minutes = Math.floor(time / 60);
-      let seconds = time % 60;
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-      return minutes + ":" + seconds;
-    }
-  };
 
   const startTimer = () => {
     if (workTime === 0 || isNaN(workTime)) {
@@ -127,12 +108,12 @@ function PomodoroTimer() {
     <View>
       <Header />
       <View style={styles.container}>
-   
         <TimerSetup
           setWorkTime={handleWorkTimeChange}
           setBreakTime={handleRestTimeChange}
         />
 
+        {/* 
         <Text>
           {isNaN(workTime)
             ? "Please set your work time"
@@ -144,9 +125,35 @@ function PomodoroTimer() {
             ? "Please set your break time"
             : "" + "Your work time is set to " + restTime}
         </Text>
+        */}
 
-        <TimerDisplay timer={timer} working={isActive} onBreak={isResting} running={timerRunning} />
-        <Text>Sets done: {worSetsCompleted}</Text>
+        <View style={styles.textContainer}>
+          {isActive && !timerRunning && (
+            <Text style={styles.textStyle}>Timer is paused</Text>
+          )}
+          {isResting && !timerRunning && (
+            <Text style={styles.textStyle}>Timer is paused</Text>
+          )}
+          {!isActive && !isResting && (
+            <Text style={styles.textStyle}>Start your timer</Text>
+          )}
+          {isActive && timerRunning && (
+            <Text style={styles.textStyle}>Keep on working!</Text>
+          )}
+          {isResting && timerRunning && (
+            <Text style={styles.textStyle}>Enjoy your break!</Text>
+          )}
+        </View>
+
+        <TimerDisplay
+          timer={timer}
+          working={isActive}
+          onBreak={isResting}
+          running={timerRunning}
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.textStyle}>You have completed {worSetsCompleted} work sets</Text>
+        </View>
 
         <TimerButtons
           timerOn={timerRunning}
@@ -194,6 +201,15 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     padding: 10,
     borderRadius: 5,
+  },
+  textStyle: {
+    fontSize: 20,
+    fontWeight: "400",
+    color: "black",
+  },
+  textContainer: {
+    alignItems: "center",
+    marginBottom: 20,
   },
 });
 
