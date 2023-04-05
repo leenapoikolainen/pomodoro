@@ -33,7 +33,7 @@ function TimerDisplay({ timer, working, onBreak }) {
       )}
       {onBreak && (
         <View style={styles.breakTimerContainer}>
-          <Text style={styles.timerTextStyle}>{formatTime(timer)}</Text>
+          <Text style={[styles.timerTextStyle, styles.textBlack]}>{formatTime(timer)}</Text>
         </View>
       )}
     </View>
@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "400",
     color: "white",
+  },
+  textBlack: {
+    color: "black"
   },
   textStyle: {
     fontSize: 20,
