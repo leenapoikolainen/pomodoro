@@ -6,13 +6,13 @@ function TimerButtons(props) {
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.pauseButtonStyle}
+          style={[styles.pauseButtonStyle, styles.shadowProp]}
           onPress={props.stopTimer}
         >
-          <Text style={styles.buttonText}>Pause</Text>
+          <Text style={[styles.buttonText, styles.shadowProp]}>Pause</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.resetButtonStyle}
+          style={[styles.resetButtonStyle, styles.shadowProp]}
           onPress={props.resetTimer}
         >
           <Text style={styles.buttonText}>Reset</Text>
@@ -23,13 +23,14 @@ function TimerButtons(props) {
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.playButtonStyle}
+          style={[styles.playButtonStyle, styles.shadowProp]}
           onPress={props.startTimer}
         >
           <Text style={styles.buttonText}>Play</Text>
         </TouchableOpacity>
+        
         <TouchableOpacity
-          style={styles.resetButtonStyle}
+          style={[styles.resetButtonStyle, styles.shadowProp]}
           onPress={props.resetTimer}
         >
           <Text style={styles.buttonText}>Reset</Text>
@@ -42,15 +43,22 @@ function TimerButtons(props) {
 export default TimerButtons;
 
 const styles = StyleSheet.create({
+  buttonText: {
+    color: "black",
+    fontSize: 20,
+    fontWeight: "300",
+    color: "white",
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: "space-evenly",
   },
-  resetButtonStyle: {
+ 
+  pauseButtonStyle: {
     alignItems: "center",
-    backgroundColor: "#c0c0c0",
-    padding: 10,
+    backgroundColor: "#cd5c5c",
+    padding: 30,
     borderRadius: 10,
     marginTop: 10,
     marginLeft: 10,
@@ -67,20 +75,22 @@ const styles = StyleSheet.create({
     marginRight: 10,
     width: 120,
   },
-  pauseButtonStyle: {
+  resetButtonStyle: {
     alignItems: "center",
-    backgroundColor: "#cd5c5c",
-    padding: 30,
+    backgroundColor: "#c0c0c0",
+    padding: 10,
     borderRadius: 10,
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
     width: 120,
   },
-  buttonText: {
-    color: "black",
-    fontSize: 20,
-    fontWeight: "300",
-    color: "white",
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
+
+  
 });
