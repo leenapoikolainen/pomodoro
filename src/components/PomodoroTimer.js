@@ -7,15 +7,17 @@ import TimerDisplay from "./TimerDisplay";
 import TimerSetup from "./TimerSetup";
 
 function PomodoroTimer() {
-  const [workTime, setWorkTime] = useState(0.1);
-  const [restTime, setRestTime] = useState(0.2);
-  const [timer, setTimer] = useState(workTime * 60);
-  const [isActive, setIsActive] = useState(false);
-  const [isResting, setIsResting] = useState(false);
-  const [timerRunning, setTimerRunning] = useState(false);
+  const [workTime, setWorkTime] = useState(0.1); // For testing purposes, set the work time to few seconds
+  const [restTime, setRestTime] = useState(0.2); // For testing purposes, set the break time to few seconds
+  const [timer, setTimer] = useState(workTime * 60); // Timer initialised with work time
+  const [isActive, setIsActive] = useState(false);  // Timer not active when starting
+  const [isResting, setIsResting] = useState(false); // Timer not resting when starting
+  const [timerRunning, setTimerRunning] = useState(false); // Timer not running when starting
+  const [worSetsCompleted, setWorkSetsCompleted] = useState(0); // No work sets completed
 
   useEffect(() => {
     let interval = null;
+
     // Timer starts when either work time or rest time starts
     if (timerRunning) {
       interval = setInterval(() => {
@@ -35,6 +37,7 @@ function PomodoroTimer() {
         setIsResting(true);
         setTimer(restTime * 60);
         console.log("Option 1");
+        setWorkSetsCompleted(worSetsCompleted + 1);
       }
       // Timer is 0, status resting --> change to work time
       else {
@@ -100,6 +103,7 @@ function PomodoroTimer() {
     setRestTime(0.2);
     setTimer(workTime * 60);
     setTimerRunning(false);
+    setWorkSetsCompleted(0);
   };
 
   const handleWorkTimeChange = (text) => {
@@ -123,26 +127,7 @@ function PomodoroTimer() {
     <View>
       <Header />
       <View style={styles.container}>
-        {/*
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel}>Work Time:</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="number-pad"
-          onChangeText={handleWorkTimeChange}
-          returnKeyType={"done"}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel}>Rest Time:</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="number-pad"
-          onChangeText={handleRestTimeChange}
-          returnKeyType={"done"}
-        />
-      </View>
-  */}
+   
         <TimerSetup
           setWorkTime={handleWorkTimeChange}
           setBreakTime={handleRestTimeChange}
@@ -160,33 +145,9 @@ function PomodoroTimer() {
             : "" + "Your work time is set to " + restTime}
         </Text>
 
-        <TimerDisplay timer={timer} working={isActive} onBreak={isResting} />
+        <TimerDisplay timer={timer} working={isActive} onBreak={isResting} running={timerRunning} />
+        <Text>Sets done: {worSetsCompleted}</Text>
 
-        {/*
-      <Text style={styles.timer}>{formatTime(timer)}</Text>
-      <Text>{isActive ? "Working" : "Not Working"}</Text>
-        
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={isActive ? stopTimer : startTimer}
-        >
-          <Text style={styles.buttonText}>{isActive ? "Stop" : "Start"}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={timerRunning ? stopTimer : startTimer}
-        >
-          <Text style={styles.buttonText}>
-            {timerRunning ? "Stop" : "Start"}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Text style={styles.buttonText}>{"Reset"}</Text>
-        </TouchableOpacity>
-*/}
         <TimerButtons
           timerOn={timerRunning}
           stopTimer={stopTimer}

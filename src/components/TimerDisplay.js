@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   setTimerContainer: {
     borderColor: "black",
     alignItems: "center",
-    backgroundColor: "#696969",
+    backgroundColor: "#c0c0c0",
     padding: "10%",
     marginBottom: 20,
     borderRadius: 80,
