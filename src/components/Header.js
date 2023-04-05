@@ -14,7 +14,7 @@ class Header extends React.Component {
 const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: "#C2362B",
-    height: 100,
+    height: 120,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 22,
+    fontVariant: 'small-caps',
     fontWeight: "700",
     letterSpacing: 2,
     marginTop: 50,

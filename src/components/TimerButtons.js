@@ -44,7 +44,7 @@ export default TimerButtons;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //flexDirection: "row",
+    alignItems: 'center',
     justifyContent: "space-evenly",
   },
   resetButtonStyle: {
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
+    width: 120,
   },
   playButtonStyle: {
     alignItems: "center",
